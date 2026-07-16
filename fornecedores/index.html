@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fornecedores</title>
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Controle de Obras</h1>
+  <nav class="topbar-actions">
+    <a href="../obras/index.html" class="btn btn-ghost">Obras</a>
+    <a href="../fornecedores/index.html" class="btn btn-ghost">Fornecedores</a>
+    <button id="btn-config" class="btn btn-ghost" title="Configurar conexão">⚙ Configuração</button>
+  </nav>
+</header>
+
+<section id="config-panel" class="config-panel hidden">
+  <div class="field">
+    <label for="cfg-url">URL do App da Web (Apps Script)</label>
+    <input id="cfg-url" type="text" placeholder="https://script.google.com/macros/s/xxx/exec">
+  </div>
+  <div class="field">
+    <label for="cfg-token">Token (senha do script, opcional)</label>
+    <input id="cfg-token" type="text" placeholder="mesma senha da propriedade TOKEN">
+  </div>
+  <button id="btn-salvar-config" class="btn btn-primary">Salvar</button>
+  <span id="config-status" class="status-msg"></span>
+</section>
+
+<main class="view">
+  <a href="../obras/index.html" class="btn btn-ghost">← Voltar</a>
+  <div class="view-header">
+    <h2>Fornecedores</h2>
+  </div>
+  <div id="fornecedores-lista" class="cards-grid"></div>
+
+  <h3>Cadastrar fornecedor</h3>
+  <form id="form-fornecedor" class="form-grid">
+    <input name="nome" placeholder="Nome" required class="span-2">
+    <input name="contato" placeholder="Contato (WhatsApp)">
+    <input name="categoria" placeholder="Categoria">
+    <input name="produtoFornecido" placeholder="Produto fornecido" class="span-2">
+    <button type="submit" class="btn btn-primary span-2">Adicionar fornecedor</button>
+  </form>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="../shared/shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

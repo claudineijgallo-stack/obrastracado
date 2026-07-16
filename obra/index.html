@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalhe da Obra</title>
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Controle de Obras</h1>
+  <nav class="topbar-actions">
+    <a href="../obras/index.html" class="btn btn-ghost">Obras</a>
+    <a href="../fornecedores/index.html" class="btn btn-ghost">Fornecedores</a>
+    <button id="btn-config" class="btn btn-ghost" title="Configurar conexão">⚙ Configuração</button>
+  </nav>
+</header>
+
+<section id="config-panel" class="config-panel hidden">
+  <div class="field">
+    <label for="cfg-url">URL do App da Web (Apps Script)</label>
+    <input id="cfg-url" type="text" placeholder="https://script.google.com/macros/s/xxx/exec">
+  </div>
+  <div class="field">
+    <label for="cfg-token">Token (senha do script, opcional)</label>
+    <input id="cfg-token" type="text" placeholder="mesma senha da propriedade TOKEN">
+  </div>
+  <button id="btn-salvar-config" class="btn btn-primary">Salvar</button>
+  <span id="config-status" class="status-msg"></span>
+</section>
+
+<main class="view">
+  <a href="../obras/index.html" class="btn btn-ghost">← Voltar</a>
+  <div class="detalhe-header">
+    <h2 id="detalhe-nome"></h2>
+    <a id="detalhe-link" href="#" target="_blank" class="link-planilha">Abrir planilha ↗</a>
+    <button id="btn-excluir-obra" class="btn btn-danger">Excluir obra</button>
+  </div>
+  <p id="detalhe-cliente" class="subtitle"></p>
+  <p id="detalhe-cno" class="subtitle"></p>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="enderecos">Endereços</button>
+    <button class="tab-btn" data-tab="documentos">Documentos</button>
+    <button class="tab-btn" data-tab="fornecedores">Fornecedores</button>
+    <button class="tab-btn" data-tab="responsaveis">Responsáveis</button>
+  </nav>
+
+  <section id="tab-enderecos" class="tab-panel">
+    <div id="enderecos-lista" class="cards-grid"></div>
+
+    <h3>Adicionar endereço</h3>
+    <form id="form-endereco" class="form-grid">
+      <input name="nomeLocal" placeholder="Nome do local (ex: Depósito, Casa do Cliente)" class="span-2">
+      <input name="endereco" placeholder="Rua / Avenida" required>
+      <input name="numero" placeholder="Número">
+      <input name="bairro" placeholder="Bairro">
+      <input name="cidade" placeholder="Cidade">
+      <input name="uf" placeholder="UF" maxlength="2">
+      <input name="cep" placeholder="CEP">
+      <input name="referencia" placeholder="Referência" class="span-2">
+      <input name="linkLocalizacao" placeholder="Link de localização (Google Maps)" class="span-2">
+      <button type="submit" class="btn btn-primary span-2">Adicionar endereço</button>
+    </form>
+  </section>
+
+  <section id="tab-documentos" class="tab-panel hidden">
+    <div id="arquivos-lista" class="cards-grid"></div>
+    <form id="form-arquivo" class="upload-row">
+      <input type="file" id="input-arquivo" accept=".pdf,image/*" multiple>
+      <button type="submit" class="btn btn-primary">Enviar arquivo(s)</button>
+    </form>
+  </section>
+
+  <section id="tab-fornecedores" class="tab-panel hidden">
+    <div class="view-header">
+      <button id="btn-novo-fornecedor-obra" class="btn btn-primary">+ Novo Fornecedor</button>
+    </div>
+    <div class="filter-row">
+      <input type="text" id="filtro-fornecedor-nome" placeholder="Filtrar por nome">
+      <input type="text" id="filtro-fornecedor-categoria" placeholder="Filtrar por categoria">
+      <input type="text" id="filtro-fornecedor-servico" placeholder="Filtrar por serviço ou insumos">
+    </div>
+    <div id="fornecedores-obra-lista" class="list-rows"></div>
+  </section>
+
+  <section id="tab-responsaveis" class="tab-panel hidden">
+    <div id="responsaveis-lista" class="cards-grid"></div>
+
+    <h3>Adicionar responsável</h3>
+    <form id="form-responsavel" class="form-grid">
+      <input name="nome" placeholder="Nome" required>
+      <input name="funcao" placeholder="Função (ex: Engenheiro, Mestre de obras)">
+      <input name="contato" placeholder="Contato (WhatsApp)" class="span-2">
+      <button type="submit" class="btn btn-primary span-2">Adicionar responsável</button>
+    </form>
+  </section>
+</main>
+
+<div id="modal-novo-fornecedor" class="modal hidden">
+  <div class="modal-box">
+    <h3>Novo Fornecedor</h3>
+    <form id="form-novo-fornecedor">
+      <div class="field">
+        <label>Nome</label>
+        <input name="nome" required>
+      </div>
+      <div class="field">
+        <label>Contato</label>
+        <input name="contato" placeholder="WhatsApp">
+      </div>
+      <div class="field">
+        <label>Categoria</label>
+        <input name="categoria">
+      </div>
+      <div class="field">
+        <label>Serviço ou insumos fornecidos</label>
+        <input name="servicoInsumos">
+      </div>
+      <div class="field">
+        <label>Cidade</label>
+        <input name="cidade">
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="btn-cancelar-fornecedor-obra" class="btn btn-ghost">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="../shared/shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
