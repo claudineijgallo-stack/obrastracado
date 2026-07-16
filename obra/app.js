@@ -154,13 +154,11 @@ function aplicarFiltroFornecedores() {
     row.className = 'list-row';
     const phone = normalizePhone(f.contato);
     row.innerHTML = `
-      <div class="list-row-info">
-        <strong>${escapeHtml(f.nome)}</strong>
-        <span>${escapeHtml(f.categoria || '')}</span>
-        <span>${escapeHtml(f.servicoInsumos || '')}</span>
-        <span>${escapeHtml(f.cidade || '')}</span>
-        <span>${escapeHtml(f.contato || '')}</span>
-      </div>
+      <span class="list-col list-col-nome" title="${escapeHtml(f.nome)}">${escapeHtml(f.nome)}</span>
+      <span class="list-col" title="${escapeHtml(f.categoria || '')}">${escapeHtml(f.categoria || '')}</span>
+      <span class="list-col" title="${escapeHtml(f.servicoInsumos || '')}">${escapeHtml(f.servicoInsumos || '')}</span>
+      <span class="list-col" title="${escapeHtml(f.cidade || '')}">${escapeHtml(f.cidade || '')}</span>
+      <span class="list-col" title="${escapeHtml(f.contato || '')}">${escapeHtml(f.contato || '')}</span>
       <div class="list-row-actions">
         ${phone ? `<a class="btn btn-whatsapp" href="https://wa.me/${phone}" target="_blank">WhatsApp</a>` : ''}
         <button class="btn btn-danger btn-excluir-fornecedor-obra" data-id="${f.id}">Excluir</button>
